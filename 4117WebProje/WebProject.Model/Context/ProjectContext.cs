@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using WebProject.Core.Entity;
 using WebProject.Model.Entities;
 using WebProject.Model.Maps;
 
@@ -44,6 +46,41 @@ namespace WebProject.Model.Context
             modelBuilder.Configurations.AddFromAssembly(typeof(IMappingMarker).Assembly);
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        public override int SaveChanges()
+        {
+            //ChangeTracker nesnesi : veritabanına giden her verinin takibini yapar. Veri o an yeni mi ekleniyor yoksa mevcut veri mi güncelleniyor bunu takip eder. 
+
+            var modifiedEntries = ChangeTracker.Entries().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified).ToList(); // Where kullandığımız için birden fazla sonuç gelebilir .
+
+            foreach (var item in modifiedEntries)
+            {
+                CoreEntity nesne =(CoreEntity) item.Entity;
+                if (item != null)
+                {
+                    if (item.State == EntityState.Added)
+                    {
+                        nesne.CreatedDate = DateTime.Now;
+                        nesne.CreatedComputerName = Environment.MachineName;
+                        //nesne.CreatedUserName = Environment.UserName;
+                        nesne.CreatedUserName = WindowsIdentity.GetCurrent().Name;
+                        nesne.Durumu = Core.Entity.Enum.Status.Active;
+                    }
+                    else if(item.State==EntityState.Modified)
+                    {
+                        nesne.ModifiedDate = DateTime.Now;
+                        nesne.ModifiedComputerName = Environment.MachineName;
+                        //nesne.CreatedUserName = Environment.UserName;
+                        nesne.ModifiedUserName = WindowsIdentity.GetCurrent().Name;
+                        nesne.Durumu = Core.Entity.Enum.Status.Active;
+                    }
+
+                }
+
+            }
+
+            return base.SaveChanges();
         }
 
     }

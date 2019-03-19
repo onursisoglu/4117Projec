@@ -1,0 +1,23 @@
+﻿
+
+@{
+    ViewBag.Title = "KategoriEkle";
+}
+
+<h2>KategoriEkle</h2>
+
+<form action="/Admin/Home/KategoriEkle" method="post">
+    <div class="form-group">
+        <label>Kategori İsmi</label>
+        <input type="text" name="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Kategori Açıklaması</label>
+        <input type="text" name="Description" class="form-control" />
+    </div>
+
+    <input type="submit" value="Ekle" class="btn btn-primary form-control"/>
+
+</form>
+

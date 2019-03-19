@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    @if (TempData[Message.MessageName] != null)
+    {
+        foreach (var item in (List<Message>)TempData[Message.MessageName])
+        {
+            string cls = "";
+
+            if (item.Type == MessageType.Success)
+            {
+                cls = "alert-success";
+            }
+            else if (item.Type == MessageType.Danger)
+            {
+                cls = "alert-danger";
+            }
+            else if (item.Type==MessageType.Warning)
+            {
+                cls = "alert-warning";
+            }
+
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="alert @cls" id="PageAlertBox" data-duration="@item.Duration">
+                        @if (item.Closeable)
+                        {
+                            <button class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        }
+                        @Html.Raw(item.Text)
+                    </div>
+                </div>
+            </div>
+
+        }
+    }
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        if ($('#PageAlertBox').length > 0)
+        {
+            var time = $('#PageAlertBox').attr("data-duration");
+            if (time != null && time != undefined)
+            {
+                time = time * 1000; // süreyi saniye cinsine cevirdik.
+
+                $('#PageAlertBox').fadeTo(time, 500).slideUp(500, function () {
+                    $('#PageAlertBox').alert('close');
+                });
+
+            }
+
+
+
+        }
+    </script>
+</body>
+</html>

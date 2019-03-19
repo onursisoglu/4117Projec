@@ -10,5 +10,6 @@ namespace WebProject.Service.Option
 {
    public class ProductService: BaseService<Product>
     {
+        
     }
 }
