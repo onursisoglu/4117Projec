@@ -1,7 +1,41 @@
 ﻿
+@model List<Category>
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Kategori Adı</th>
+                <th>Açıklaması</th>
+                <th>Durumu</th>
+                <th>Eklenme Tarihi</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.Durumu</td>
+                    <td>@item.CreatedDate</td>
+                    <td>
+                        <a href="/Admin/Home/Guncelle/@item.ID">Güncelle</a>
+                        <a href="/Admin/Home/Sil/@item.ID">Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+
 

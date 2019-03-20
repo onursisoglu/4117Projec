@@ -12,23 +12,23 @@ namespace WebProject.UI.Areas.Admin.Controllers
     public class HomeController : BaseController
     {
         // GET: Admin/Home
+        CategoryService _categoryService;
+        public HomeController()
+        {
+            _categoryService = new CategoryService();
+        }
+
+
         //Kategorileri Listeleme için kullanılacak
         public ActionResult Index()
         {
-            return View();
+            return View(_categoryService.GetAll());
         }
 
         // Kategori Ekleme için Sayfa Gösterelim
         public ActionResult KategoriEkle()
         {
             return View();
-        }
-
-
-        CategoryService _categoryService;
-        public HomeController()
-        {
-            _categoryService = new CategoryService();
         }
 
         [HttpPost]
@@ -38,5 +38,34 @@ namespace WebProject.UI.Areas.Admin.Controllers
             ShowMessage(Utility.MessageType.Success, "Kategori Başarılı bir şekilde eklendi", 5, true);
             return View();
         }
+
+
+        //Index sayfasından listeden seçili kategorinin id si gelecek ve kullanıcıya o kategorinin güncelleme için olan sayfasını göstereceğiz.
+        public ActionResult Guncelle(Guid id)
+        {
+            Category secilenKat = _categoryService.GetByID(id);
+            return View(secilenKat);
+
+        }
+
+
+        [HttpPost]
+        public ActionResult Guncelle(Category model)
+        {
+            try
+            {
+                Category guncellencekKat = _categoryService.GetByID(model.ID);
+                _categoryService.Update(model);
+                ShowMessage(Utility.MessageType.Success, "Güncelleme Başarılı", 3, true);
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(Utility.MessageType.Danger, "Güncelleme sırasında hata olıştu", 3, false);
+            }
+
+          return RedirectToAction("Index", "Home");
+           
+        }
+
     }
 }

@@ -1,0 +1,26 @@
+﻿
+@model Category
+@{
+    ViewBag.Title = "Guncelle";
+}
+
+<h2>Guncelle</h2>
+
+<form action="/Admin/Home/Guncelle" method="post">
+    <div class="form-group">
+        <label>Kategori İsmi</label>
+        <input type="text" name="Name" value="@Model.Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Kategori Açıklaması</label>
+        <input type="text" name="Description" value="@Model.Description" class="form-control" />
+    </div>
+
+    <!--Bu sayfada kullanıcı veriyi güncellediği zaman butona bastığı anda HttpPost olarak bu veri gönderim olyını yakalıcaz. Gelen verinin veritabanında hangi orjinal veri ile değiştirileceğini anlayabilmek için bu sayfadan güncellene kategorinin id 'sinin tekrar post anına yolluyoruz.-->
+
+    <input type="hidden" name="ID" value="@Model.ID"/>
+
+    <input type="submit" value="Güncelle" class="btn btn-warning form-control" />
+
+</form>

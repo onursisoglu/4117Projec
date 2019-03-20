@@ -21,6 +21,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li><a href="@Url.Action("Index","Home",new { area="Admin"})">Kategoriler</a> </li>
+                    <li><a href="/Admin/SubCategory/Index">Alt Kategoriler</a> </li>
+                    <li><a href="@Url.Action("Index","Product",new { area="Admin"})">Ürünler</a> </li>
+                    <li><a href="@Url.Action("Index","AppUser",new { area="Admin"})">Kullanıcılar</a> </li>
+                    <li><a href="@Url.Action("Index","Order",new { area="Admin"})">Siparişler</a> </li>
                 </ul>
             </div>
         </div>

@@ -237,6 +237,7 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Home\KategoriEkle.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Guncelle.cshtml" />
     <None Include="Content\js\jquery-1.7-vsdoc.js" />
     <Content Include="Content\js\jquery-1.7.js" />
     <Content Include="Content\js\jquery-1.7.min.js" />
@@ -325,6 +326,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WebProject.Core\WebProject.Core.csproj">
+      <Project>{4d0c9933-abec-4a56-b54b-00600e4d23ec}</Project>
+      <Name>WebProject.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebProject.Model\WebProject.Model.csproj">
       <Project>{412DDC92-1E99-4AE1-BA5B-B70D256A6B93}</Project>
       <Name>WebProject.Model</Name>
