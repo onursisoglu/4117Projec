@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@model List<SubCategory>
+
+<h2>Alt Kategori Listesi</h2>
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Alt Kategori Adı</th>
+                <th>Açıklaması</th>
+                <th>Ana Kategorisi</th>
+                <th>Durumu</th>
+                <th>Eklenme Tarihi</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.MainCategory.Name</td>
+                    <td>@item.Durumu</td>
+                    <td>@item.CreatedDate</td>
+                    <td>
+                        <a href="/Admin/SubCategory/Update/@item.ID">Güncelle</a>
+                        <a href="/Admin/SubCategory/Delete/@item.ID">Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+

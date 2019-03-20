@@ -67,5 +67,24 @@ namespace WebProject.UI.Areas.Admin.Controllers
            
         }
 
+
+        public ActionResult Sil(Guid id)
+        {
+            bool sonuc = _categoryService.Remove(id);
+
+            if (sonuc)
+            {
+                ShowMessage(Utility.MessageType.Success, "Silme işlemi başarılıdır", 3, true);
+            }
+            else
+            {
+                ShowMessage(Utility.MessageType.Danger, "Silme işlemi hatalıdır", 5, false);
+            }
+
+            return RedirectToAction("Index", "Home");
+
+        }
+
+
     }
 }

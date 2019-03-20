@@ -1,0 +1,36 @@
+﻿
+@model List<Category>
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Add</h2>
+
+<form action="/Admin/SubCategory/Add" method="post">
+    <div class="form-group">
+        <label>Alt Kategori İsmi</label>
+        <input type="text" name="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Alt Kategori Açıklaması</label>
+        <input type="text" name="Description" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Ana Kategori Seçiniz</label>
+        <select class="form-control" name="CategoryID">
+            @foreach (var item in Model)
+            {
+                <option value="@item.ID">@item.Name</option>
+            }
+        </select>
+    </div>
+
+    <input type="submit" value="Ekle" class="btn btn-primary form-control" />
+
+</form>
+
+
+
+

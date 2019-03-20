@@ -91,10 +91,20 @@ namespace WebProject.Service.Base
      
         public void Update(T item)
         {
-            db.Set<T>().Attach(item);
-            db.Entry(item).State = System.Data.Entity.EntityState.Modified;
-            //DbEntityEntry orjinalNesne = db.Entry(item);   //Veritabanında  verileri izlmeye ve kontrol etmeye yardımcı bir classtır. metoduna parametre olarak verilen nesneyi ele alır.
-            //orjinalNesne.CurrentValues.SetValues(item);// CurrentValues : şimdiki değerleri  SetValues : şimdiki değerlerin yerine parametredeki yeni değerleri ata.
+            //Created Date  vb gibi  önceden dolu olan verileri kaybetmemek için önce güncellenecek veriyi bulup burada modified işlemlerine yedirelim.
+
+            T orjinalVeri = GetByID(item.ID);
+            item.CreatedDate = orjinalVeri.CreatedDate;
+            item.CreatedComputerName = orjinalVeri.CreatedComputerName;
+            item.CreatedUserName = orjinalVeri.CreatedUserName;
+            item.Durumu = orjinalVeri.Durumu;
+            //db.Set<T>().Attach(item);
+
+            //db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+
+            DbEntityEntry orjinalNesne = db.Entry(orjinalVeri);   //Veritabanında  verileri izlmeye ve kontrol etmeye yardımcı bir classtır. metoduna parametre olarak verilen nesneyi ele alır.
+
+            orjinalNesne.CurrentValues.SetValues(item);// CurrentValues : şimdiki değerleri  SetValues : şimdiki değerlerin yerine parametredeki yeni değerleri ata.
             Save();
 
         }

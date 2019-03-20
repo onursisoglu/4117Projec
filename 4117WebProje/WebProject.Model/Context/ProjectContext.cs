@@ -73,7 +73,10 @@ namespace WebProject.Model.Context
                         nesne.ModifiedComputerName = Environment.MachineName;
                         //nesne.CreatedUserName = Environment.UserName;
                         nesne.ModifiedUserName = WindowsIdentity.GetCurrent().Name;
-                        nesne.Durumu = Core.Entity.Enum.Status.Active;
+                        if (nesne.Durumu == Core.Entity.Enum.Status.Active)
+                        {
+                            nesne.Durumu = Core.Entity.Enum.Status.Active;
+                        }
                     }
 
                 }
