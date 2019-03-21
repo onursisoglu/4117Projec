@@ -41,8 +41,69 @@ namespace WebProject.UI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Add(Product model,HttpPostedFileBase Image)
         {
-            ImageUploader.UploadImage("/Uploads/", Image);
-            return View();
+            try
+            {
+               model.ImagePath=ImageUploader.UploadImage("/Uploads/", Image);
+                if (model.ImagePath == "0" || model.ImagePath == "2")
+                {
+                    model.ImagePath = "/Uploads/user-512.png";
+                }
+
+                _productService.Add(model);
+                ShowMessage(MessageType.Success, "Ürün başarılı bir şekilde eklendi", 3, true);
+            }
+            catch (Exception)
+            {
+
+                ShowMessage(MessageType.Danger, "Ürün eklenemedi bir hata oluştu", 3, true);
+            }
+
+            return Redirect("/Admin/Product/Index");
         }
+
+        //Get olayı için
+        public ActionResult Update(Guid id)
+        {
+            ProductVM vm = new ProductVM();
+            vm.AltKategoriler = _subcategoryService.GetActive();
+
+            Product bulunanUrun = _productService.GetByID(id);
+
+            vm.ID = bulunanUrun.ID;
+            vm.Name = bulunanUrun.Name;
+            vm.Price = bulunanUrun.Price;
+            vm.UnitsInStock = bulunanUrun.UnitsInStock;
+            vm.SubCategoryID = bulunanUrun.SubCategoryID;
+            vm.ImagePath = bulunanUrun.ImagePath;
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult Update(Product model,HttpPostedFileBase Image)
+        {
+            try
+            {
+                if (Image != null)
+                {
+                    model.ImagePath = ImageUploader.UploadImage("/Uploads/", Image);
+                    if (model.ImagePath == "0" || model.ImagePath == "2")
+                    {
+                        model.ImagePath = "/Uploads/user-512.png";
+                    }
+                }
+                _productService.Update(model);
+                ShowMessage(MessageType.Success, "Ürün Güncellendi", 3, true);
+            }
+            catch (Exception)
+            {
+
+                ShowMessage(MessageType.Warning, "Ürün Güncellenemedi", 3, false);
+            }
+
+            return RedirectToAction("Index", "Product");
+
+        }
+
     }
 }

@@ -133,6 +133,7 @@
     <Content Include="Areas\Admin\Views\SubCategory\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SubCategory\Update.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Update.cshtml" />
     <None Include="Content\js\jquery-1.7-vsdoc.js" />
     <Content Include="Content\js\jquery-1.7.js" />
     <Content Include="Content\js\jquery-1.7.min.js" />
@@ -170,6 +171,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Uploads\user-512.png" />
     <Content Include="Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -223,7 +225,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Models\" />
-    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebProject.Core\WebProject.Core.csproj">
