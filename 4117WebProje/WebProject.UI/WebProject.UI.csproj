@@ -134,6 +134,8 @@
     <Content Include="Areas\Admin\Views\SubCategory\Update.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AppUser\Index.cshtml" />
     <None Include="Content\js\jquery-1.7-vsdoc.js" />
     <Content Include="Content\js\jquery-1.7.js" />
     <Content Include="Content\js\jquery-1.7.min.js" />
@@ -170,7 +172,11 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="NTIERAdimlari.txt" />
+    <Content Include="Uploads\cart.png" />
     <Content Include="Uploads\user-512.png" />
     <Content Include="Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -182,16 +188,21 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AppUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubCategoryController.cs" />
     <Compile Include="Areas\Admin\Models\ViewModels\ProductVM.cs" />
     <Compile Include="Areas\Admin\Models\ViewModels\SubCategoryVM.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Sepet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\ImageUploader.cs" />
     <Compile Include="Utility\Message.cs" />
@@ -214,6 +225,11 @@
     <Content Include="Content\Scripts\jquery-1.9.1.min.map" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\Layoutum.cshtml" />
+    <Content Include="Views\Auth\Login.cshtml" />
+    <Content Include="Views\Auth\Register.cshtml" />
+    <Content Include="Views\Home\_CategoryList.cshtml" />
+    <Content Include="Views\Product\GetProducts.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -224,7 +240,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
-    <Folder Include="Models\" />
+    <Folder Include="UserUploads\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebProject.Core\WebProject.Core.csproj">

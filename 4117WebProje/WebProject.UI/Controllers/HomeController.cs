@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebProject.Service.Option;
 
 namespace WebProject.UI.Controllers
 {
@@ -13,5 +14,17 @@ namespace WebProject.UI.Controllers
         {
             return View();
         }
+
+
+        public ActionResult _CategoryList()
+        {
+            CategoryService _catService = new CategoryService();
+
+            return PartialView(_catService.GetActive());
+        }
+
+
+
+
     }
 }

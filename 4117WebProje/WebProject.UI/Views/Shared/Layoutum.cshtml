@@ -46,9 +46,28 @@
                     <div class="cnt-account">
                         <ul class="list-unstyled">
 
+                            @{
+                                string ad = HttpContext.Current.User.Identity.Name;
 
-                            <li><a href="/Home/Login"><i class="icon fa fa-lock"></i>Giriş Yap</a></li>
-                            <li><a href="/Home/Register"><i class="icon fa fa-user"></i>Kayıt Ol</a></li>
+                            }
+
+                            @if (ad != null && ad != "")
+                            {
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Hoşgeldiniz @ad</a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#">Çıkış Yap <i class="glyphicon glyphicon-log-out"></i> </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+                            else
+                            {
+                                <li><a href="/Auth/Login"><i class="icon fa fa-lock"></i>Giriş Yap</a></li>
+                                <li><a href="/Auth/Register"><i class="icon fa fa-user"></i>Kayıt Ol</a></li>
+                            }
+
 
 
                         </ul>
@@ -83,11 +102,21 @@
                         <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
 
                         <div class="" style="margin-top:50px;">
-                            <a href="@Url.Action(" Index", "Cart" )">
+                            <a href="@Url.Action("Index", "Cart")">
                                 <div class="">
 
-                                    <img src="~/Content/Images/cart.png" width="40" height="40" />
-                                    <span id="sepetSayi" class="badge"></span>
+                                    @{
+                                        int? count = null;
+                                        if (Session["sepetim"] != null)
+                                        {
+                                            List<WebProject.UI.Models.Sepet> sepList = Session["sepetim"] as List<WebProject.UI.Models.Sepet>;
+
+                                            count = sepList.Count;
+                                        }
+                                    }
+
+                                    <img src="~/Uploads/cart.png" width="40" height="40" />
+                                    <span id="sepetSayi" class="badge">@count</span>
                                 </div>
                             </a>
                         </div>
@@ -134,13 +163,49 @@
     </header>
     <!-- ============================================== HEADER : END ============================================== -->
     <!--Temp Message-->
+    @if (TempData[Message.MessageName] != null)
+    {
+        foreach (var item in (List<Message>)TempData[Message.MessageName])
+        {
+            string cls = "";
+
+            if (item.Type == MessageType.Success)
+            {
+                cls = "alert-success";
+            }
+            else if (item.Type == MessageType.Danger)
+            {
+                cls = "alert-danger";
+            }
+            else if (item.Type == MessageType.Warning)
+            {
+                cls = "alert-warning";
+            }
+
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="alert @cls" id="PageAlertBox" data-duration="@item.Duration">
+                        @if (item.Closeable)
+                        {
+                            <button class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        }
+                        @Html.Raw(item.Text)
+                    </div>
+                </div>
+            </div>
+
+        }
+    }
+
 
     <div class="body-content outer-top-xs" id="top-banner-and-menu">
         <div class="container">
             <div class="row">
 
                 <div class="col-md-3 col-lg-3 sidebar">
-                    <!--Side Bar Category-->
+                    @Html.Action("_CategoryList","Home")
                 </div>
                 <div class="col-md-9 col-lg-9">
                     @RenderBody()
@@ -295,8 +360,24 @@
     <script src="~/Content/js/wow.min.js"></script>
     <!--<script src="/js/scripts.js"></script>-->
     <script src="~/Content/js/scripts.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    @RenderSection("scriptlerim",false)
+    <script>
+        if ($('#PageAlertBox').length > 0) {
+            var time = $('#PageAlertBox').attr("data-duration");
+            if (time != null && time != undefined) {
+                time = time * 1000; // süreyi saniye cinsine cevirdik.
+
+                $('#PageAlertBox').fadeTo(time, 500).slideUp(500, function () {
+                    $('#PageAlertBox').alert('close');
+                });
+
+            }
 
 
+
+        }
+    </script>
 
 
 </body>

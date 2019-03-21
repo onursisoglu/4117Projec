@@ -1,0 +1,82 @@
+﻿
+@{
+    Layout = null;
+}
+@model AppUser
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div style="height:100%;width:100%;background-image:url('https://webtasarimsinan.files.wordpress.com/2015/02/sonbahar-tren-yolu.jpg');background-repeat:no-repeat;background-size:cover">
+
+        <div class="container">
+            <div class="col-md-6 col-lg-6 col-lg-push-3 col-md-push-3">
+                <div class="panel panel-default" style="opacity:0.8;margin-top:17%">
+                    <div class="panel-body">
+                        @using (Html.BeginForm("Register","Auth",FormMethod.Post,new {enctype="multipart/form-data"}))
+                        {
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Name)
+                                @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.LastName)
+                                @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.UserName)
+                                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Email)
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Address)
+                                @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.PhoneNumber)
+                                @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control" })
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Password)
+                                @Html.TextBoxFor(x => x.Password, new { @class = "form-control" })
+
+                            </div>
+
+                            <div class="form-group">
+                                <label>Resim Seçiniz</label>
+                                <input type="file" name="userImage"/>
+
+                            </div>
+
+                            <input type="submit" value="Kayıt Ol" class="btn btn-success" />
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</body>
+</html>

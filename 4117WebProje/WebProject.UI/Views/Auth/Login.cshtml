@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    //Layout = "~/Views/Shared/Layoutum.cshtml";
+}
+@model AppUser
+
+<html>
+<head>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div style="height:100%;width:100%;background-image:url('https://webtasarimsinan.files.wordpress.com/2015/02/sonbahar-tren-yolu.jpg');background-repeat:no-repeat;background-size:cover">
+
+        <div class="container" >
+            <div class="col-md-6 col-lg-6 col-lg-push-3 col-md-push-3">
+                <div class="panel panel-default" style="opacity:0.8;margin-top:40%">
+                    <div class="panel-body">
+                        @using (Html.BeginForm())
+                        {
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.UserName)
+                                @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Password)
+                                @Html.TextBoxFor(x => x.Password, new { @class = "form-control" })
+
+                            </div>
+
+                            <input type="checkbox" name="RememberMe" value="true" /> <label>Beni Hatırla</label>
+                            <br />
+
+                            <input type="submit" value="Giriş Yap" class="btn btn-success" />
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,59 @@
+﻿
+@model List<Product>
+
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<a class="btn btn-success pull-right" href="@Url.Action("Add","Product")"> <i class="glyphicon glyphicon-plus"></i>Yeni Ürün Ekle</a>
+
+<h2>Ürün Listesi</h2>
+
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Adı</th>
+                <th>Fiyatı</th>
+                <th>Stok Miktarı</th>
+                <th>A. Kategorisi</th>
+                <th>Ana Kategorisi</th>
+                <th>Resmi</th>
+                <th>Durumu</th>
+                <th>Eklenme Tarihi</th>
+                <th>Güncellenme Tarihi</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                    <td>@item.UnitsInStock</td>
+                    <td>@item.AltKategori.Name</td>
+                    <td>@item.AltKategori.MainCategory.Name</td>
+                    <td> <img style="height:60px;width:70px;" src="@item.ImagePath" /> </td>
+                    <td>@item.Durumu</td>
+                    <td>@item.CreatedDate</td>
+                    <td>@item.ModifiedDate</td>
+                    <td>
+                        <a href="/Admin/Product/Update/@item.ID">Güncelle</a>
+                        <a href="/Admin/Product/Delete/@item.ID">Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+

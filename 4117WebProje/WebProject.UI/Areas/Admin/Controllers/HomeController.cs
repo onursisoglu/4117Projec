@@ -58,7 +58,7 @@ namespace WebProject.UI.Areas.Admin.Controllers
                 _categoryService.Update(model);
                 ShowMessage(Utility.MessageType.Success, "Güncelleme Başarılı", 3, true);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 ShowMessage(Utility.MessageType.Danger, "Güncelleme sırasında hata olıştu", 3, false);
             }

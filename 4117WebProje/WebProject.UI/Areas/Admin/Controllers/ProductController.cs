@@ -105,5 +105,21 @@ namespace WebProject.UI.Areas.Admin.Controllers
 
         }
 
+        public ActionResult Delete(Guid id)
+        {
+            bool sonuc=_productService.Remove(id);
+
+            if (sonuc)
+            {
+                ShowMessage(MessageType.Success, "Ürün Silindi", 3, true);
+            }
+            else
+            {
+                ShowMessage(MessageType.Warning, "Ürün Silinemedi", 3, true);
+            }
+
+            return RedirectToAction("Index", "Product");
+        }
+
     }
 }
